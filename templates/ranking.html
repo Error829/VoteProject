@@ -19,7 +19,7 @@
         <div class="ranking-list">
             {% for id, candidate in candidates.items()|sort(attribute='1.votes', reverse=true) %}
             <div class="ranking-item">
-                <img src="{{ url_for('static', filename='images/' + candidate.image) }}" alt="{{ candidate.name }}">
+                <img src="{{ url_for('static', filename='images/' + candidate.images[0]) }}" alt="{{ candidate.name }}">
                 <div class="ranking-info">
                     <h3>{{ candidate.name }}</h3>
                     <p>总票数: {{ candidate.votes }}</p>

@@ -14,12 +14,31 @@ VOTES_FILE = 'data/votes.json'
 def init_votes():
     if not os.path.exists(VOTES_FILE):
         initial_data = {
-            "candidate1": {"name": "选手1", "votes": 0, "image": "你的图片1.jpg"},
-            "candidate2": {"name": "选手2", "votes": 0, "image": "你的图片2.jpg"},
-            "candidate3": {"name": "选手3", "votes": 0, "image": "你的图片3.jpg"}
+            "candidate1": {
+                "name": "选手1", 
+                "votes": 0, 
+                "main_image": "picture1.jpg",  # 主展示图片
+                "images": ["picture1.jpg", "picture2.jpg", "picture3.jpg"]  # 弹窗中显示的所有图片
+            },
+            "candidate2": {
+                "name": "选手2", 
+                "votes": 0, 
+                "main_image": "picture2.jpg",
+                "images": ["picture1.jpg", "picture2.jpg", "picture3.jpg"]
+            },
+            "candidate3": {
+                "name": "选手3", 
+                "votes": 0, 
+                "main_image": "picture3.jpg",
+                "images": ["picture1.jpg", "picture2.jpg", "picture3.jpg"]
+            }
         }
         with open(VOTES_FILE, 'w', encoding='utf-8') as f:
             json.dump(initial_data, f, ensure_ascii=False)
+
+# 删除现有的 votes.json 文件，强制重新初始化
+if os.path.exists(VOTES_FILE):
+    os.remove(VOTES_FILE)
 
 init_votes()
 
@@ -50,4 +69,5 @@ def vote(candidate_id):
     return jsonify({"success": False})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port='8888')
+    # app.run(debug=True)
+    app.run(host="172.24.46.64", port="8888")

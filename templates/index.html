@@ -19,10 +19,38 @@
         <div class="candidates-grid">
             {% for id, candidate in candidates.items() %}
             <div class="candidate-card">
-                <img src="{{ url_for('static', filename='images/' + candidate.image) }}" alt="{{ candidate.name }}">
+                <div class="main-image" onclick="openModal('{{ id }}')">
+                    <img src="{{ url_for('static', filename='images/' + candidate.main_image) }}"
+                        alt="{{ candidate.name }}" class="preview-image">
+                    <div class="image-overlay">点击查看更多</div>
+                </div>
                 <h3>{{ candidate.name }}</h3>
                 <p>当前票数: <span class="vote-count" id="votes-{{ id }}">{{ candidate.votes }}</span></p>
-                <button onclick="vote('{{ id }}')">投票</button>
+                <button class="vote-btn" onclick="vote('{{ id }}')">投票</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 弹窗 -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            {% for id, candidate in candidates.items() %}
+            <div class="modal-gallery" id="gallery-{{ id }}" style="display: none;">
+                <h2 class="modal-title">{{ candidate.name }}</h2>
+                <div class="modal-showcase">
+                    <button class="modal-nav prev-btn" onclick="prevImage('{{ id }}')">&lt;</button>
+                    <div class="modal-frame">
+                        {% for image in candidate.images %}
+                        <div class="modal-slide" data-index="{{ loop.index0 }}">
+                            <img src="{{ url_for('static', filename='images/' + image) }}" alt="{{ candidate.name }}">
+                            <div class="image-counter">{{ loop.index }} / {{ candidate.images|length }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="modal-nav next-btn" onclick="nextImage('{{ id }}')">&gt;</button>
+                </div>
             </div>
             {% endfor %}
         </div>
