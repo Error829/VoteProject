@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投票系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <nav>
+        <a href="/" class="active">首页</a>
+        <a href="/ranking">排行榜</a>
+    </nav>
+
+    <div class="container">
+        <h1>选手投票</h1>
+        <div class="candidates-grid">
+            {% for id, candidate in candidates.items() %}
+            <div class="candidate-card">
+                <img src="{{ url_for('static', filename='images/' + candidate.image) }}" alt="{{ candidate.name }}">
+                <h3>{{ candidate.name }}</h3>
+                <p>当前票数: <span class="vote-count" id="votes-{{ id }}">{{ candidate.votes }}</span></p>
+                <button onclick="vote('{{ id }}')">投票</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

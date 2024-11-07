@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排行榜 - 投票系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <nav>
+        <a href="/">首页</a>
+        <a href="/ranking" class="active">排行榜</a>
+    </nav>
+
+    <div class="container">
+        <h1>投票排行榜</h1>
+        <div class="ranking-list">
+            {% for id, candidate in candidates.items()|sort(attribute='1.votes', reverse=true) %}
+            <div class="ranking-item">
+                <img src="{{ url_for('static', filename='images/' + candidate.image) }}" alt="{{ candidate.name }}">
+                <div class="ranking-info">
+                    <h3>{{ candidate.name }}</h3>
+                    <p>总票数: {{ candidate.votes }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
