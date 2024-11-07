@@ -18,7 +18,7 @@ def init_votes():
                 "name": "选手1", 
                 "votes": 0, 
                 "main_image": "picture1.jpg",  # 主展示图片
-                "images": ["picture1.jpg", "picture2.jpg", "picture3.jpg"]  # 弹窗中显示的所有图片
+                "images": ["picture4.jpg", "picture5.jpg", "picture1.jpg"]  # 弹窗中显示的所有图片
             },
             "candidate2": {
                 "name": "选手2", 

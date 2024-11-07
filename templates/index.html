@@ -40,7 +40,6 @@
             <div class="modal-gallery" id="gallery-{{ id }}" style="display: none;">
                 <h2 class="modal-title">{{ candidate.name }}</h2>
                 <div class="modal-showcase">
-                    <button class="modal-nav prev-btn" onclick="prevImage('{{ id }}')">&lt;</button>
                     <div class="modal-frame">
                         {% for image in candidate.images %}
                         <div class="modal-slide" data-index="{{ loop.index0 }}">
@@ -49,7 +48,10 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <button class="modal-nav next-btn" onclick="nextImage('{{ id }}')">&gt;</button>
+                    <div class="modal-nav-container">
+                        <button class="modal-nav prev-btn" onclick="prevImage('{{ id }}')">&lt;</button>
+                        <button class="modal-nav next-btn" onclick="nextImage('{{ id }}')">&gt;</button>
+                    </div>
                 </div>
             </div>
             {% endfor %}
